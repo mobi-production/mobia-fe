@@ -1,1 +1,1 @@
-export { default as useEventEffect } from './use-event-effect'
+export { default as useEffectEvent } from './use-effect-event'

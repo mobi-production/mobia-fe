@@ -4,7 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 
 import { AnyFunction } from '../type'
 
-const useEventEffect = <TFunc extends AnyFunction>(func: TFunc) => {
+const useEffectEvent = <TFunc extends AnyFunction>(func: TFunc) => {
   const funcRef = useRef(func)
   useLayoutEffect(() => {
     funcRef.current = func
@@ -20,4 +20,4 @@ const useEventEffect = <TFunc extends AnyFunction>(func: TFunc) => {
     return unmount
   }, [onInit])
 }
-export default useEventEffect
+export default useEffectEvent
