@@ -9,7 +9,7 @@ type Props = Record<string, RouteObject[]>
  * 해당 함수는 고차함수의 형태로 함수를 반환하며 해당 함수로 생성된 함수의 매개변수에는 Record<string, RouteObject[]>가 전달되며
  * 전달된 record의 key가 parent route path의 이름이 됩니다.
  *
- * @author Seongyong Kim
+ * @author Peanut
  * @param {RouteObject} initialRoute
  * @returns {Function(args:Record<string, RouteObject[]>): RouteObject[]}
  * @example
