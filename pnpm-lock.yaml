@@ -17,6 +17,9 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.13.0
     version: 11.13.0(@emotion/react@11.13.3)(@types/react@18.3.11)(react@18.3.1)
+  '@hookform/resolvers':
+    specifier: ^3.9.0
+    version: 3.9.0(react-hook-form@7.53.0)
   '@sentry/react':
     specifier: ^8.33.1
     version: 8.33.1(react@18.3.1)
@@ -1082,6 +1085,17 @@ packages:
     dependencies:
       levn: 0.4.1
     dev: true
+
+  /@hookform/resolvers@3.9.0(react-hook-form@7.53.0):
+    resolution:
+      {
+        integrity: sha512-bU0Gr4EepJ/EQsH/IwEzYLsT/PEj5C0ynLQ4m+GSHS+xKH4TfSelhluTgOaoc4kA5s7eCsQbM4wvZLzELmWzUg==
+      }
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.53.0(react@18.3.1)
+    dev: false
 
   /@humanfs/core@0.19.0:
     resolution:

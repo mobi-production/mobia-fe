@@ -17,6 +17,7 @@
     "@emotion/css": "^11.13.4",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@hookform/resolvers": "^3.9.0",
     "@sentry/react": "^8.33.1",
     "@sentry/tracing": "^7.114.0",
     "@swan-io/boxed": "^2.3.2",
