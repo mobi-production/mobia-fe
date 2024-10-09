@@ -4,6 +4,7 @@ export const colors = {
   white: '#FFFFFF',
   black: '#191919',
   red: '#F03838',
+  red_soft: '#FF7070',
   green: {
     500: '#00C892',
     600: '#00B588',
