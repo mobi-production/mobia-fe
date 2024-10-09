@@ -1,15 +1,16 @@
 import { Button } from '@chakra-ui/react'
 import * as Sentry from '@sentry/react'
-import { useEffect } from 'react'
 import { useNavigate, useRouteError } from 'react-router-dom'
 
-const RootErrorBoundary = () => {
+import { useEventEffect } from '@/core/hooks'
+
+const RootError = () => {
   const error = useRouteError()
   const navigate = useNavigate()
 
-  useEffect(() => {
+  useEventEffect(() => {
     Sentry.captureException(error)
-  }, [error])
+  })
 
   return (
     <div>
@@ -19,4 +20,4 @@ const RootErrorBoundary = () => {
   )
 }
 
-export default RootErrorBoundary
+export default RootError
