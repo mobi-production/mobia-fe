@@ -1,7 +1,9 @@
 import { Container, Flex, VStack } from '@chakra-ui/react'
 import { PropsWithChildren } from 'react'
 
-const AuthFormContainer: React.FC<PropsWithChildren> = ({ children }) => {
+const AuthSignInSignUpFormContainer: React.FC<PropsWithChildren> = ({
+  children
+}) => {
   return (
     <Container
       maxW='md'
@@ -23,4 +25,4 @@ const AuthFormContainer: React.FC<PropsWithChildren> = ({ children }) => {
   )
 }
 
-export default AuthFormContainer
+export default AuthSignInSignUpFormContainer

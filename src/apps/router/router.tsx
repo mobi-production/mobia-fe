@@ -16,7 +16,7 @@ const defaultRoutes: RouteObject = {
   children: [
     {
       index: true,
-      element: <Navigate to='/auth' />
+      element: <Navigate to='/auth/sign-in' />
     }
   ]
 }
