@@ -61,6 +61,7 @@ export default tseslint.config(
           assertionStyle: 'never'
         }
       ],
+      '@typescript-eslint/consistent-type-definitions': 'off',
       '@typescript-eslint/no-non-null-assertion': 'error'
     }
   },
