@@ -1,30 +1,17 @@
-import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  HStack,
-  Input,
-  Stack,
-  Text
-} from '@chakra-ui/react'
+import { Stack, Text } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
-import { createSxProps } from '@/core/helper'
-import AuthSignInSignUpFormContainer from '@/domains/auth/components/auth-sign-in-sign-up-container'
+import AuthFormContainer from '@/domains/auth/components/auth-form-container'
+import AuthInputField from '@/domains/auth/components/auth-input-field'
+import AuthSubmitButton from '@/domains/auth/components/auth-submit-buttom'
+import { signInSchema } from '@/domains/auth/constants/validate/schema'
 
-const schema = z.object({
-  email: z.string().email({
-    message: '이메일 형식에 맞지 않습니다.'
-  }),
-  password: z.string().min(1, {
-    message: '비밀번호를 입력해 주세요.'
-  })
-})
+import SignInFooterLinks from './components/signin-footer-links'
 
-type FormValues = z.infer<typeof schema>
+type FormValues = z.infer<typeof signInSchema>
 
 const SignInPage = () => {
   const navigate = useNavigate()
@@ -33,10 +20,7 @@ const SignInPage = () => {
     handleSubmit,
     formState: { errors, isSubmitting }
   } = useForm<FormValues>({
-    defaultValues: {
-      email: ''
-    },
-    resolver: zodResolver(schema)
+    resolver: zodResolver(signInSchema)
   })
 
   const onSubmitSignIn: SubmitHandler<FormValues> = (data) => {
@@ -47,7 +31,7 @@ const SignInPage = () => {
   }
 
   return (
-    <AuthSignInSignUpFormContainer>
+    <AuthFormContainer>
       <Text
         color='green.700'
         fontWeight='bold'
@@ -60,82 +44,29 @@ const SignInPage = () => {
         width='full'
         spacing={7}>
         <Stack spacing={2}>
-          <FormControl
+          <AuthInputField
+            type='email'
+            placeholder='이메일 주소를 입력해주세요.'
+            register={register('email')}
             isInvalid={!!errors.email}
-            isRequired>
-            <Input
-              type='email'
-              size='lg'
-              fontSize='sm'
-              focusBorderColor='primary'
-              errorBorderColor='red_soft'
-              placeholder='이메일 주소를 입력해주세요.'
-              {...register('email')}
-            />
-            <FormErrorMessage
-              fontSize='xs'
-              color='red_soft'>
-              {errors.email?.message}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl
+            errorMessage={errors.email?.message}
+          />
+          <AuthInputField
+            type='password'
+            placeholder='비밀번호를 입력해주세요.'
+            register={register('password')}
             isInvalid={!!errors.password}
-            isRequired>
-            <Input
-              type='password'
-              size='lg'
-              fontSize='sm'
-              focusBorderColor='primary'
-              errorBorderColor='red_soft'
-              placeholder='비밀번호를 입력해주세요.'
-              {...register('password')}
-            />
-            <FormErrorMessage
-              fontSize='xs'
-              color='red_soft'>
-              {errors.password?.message}
-            </FormErrorMessage>
-          </FormControl>
+            errorMessage={errors.password?.message}
+          />
         </Stack>
-        <Button
-          type='submit'
-          w='full'
-          colorScheme='green'
-          bg='green_gray'
-          fontWeight='semibold'
-          sx={styles.button}
-          isLoading={isSubmitting}>
-          로그인
-        </Button>
+        <AuthSubmitButton
+          isLoading={isSubmitting}
+          buttonLabel='로그인'
+        />
       </Stack>
-      <HStack spacing={4}>
-        <Button
-          size='xs'
-          variant='link'
-          colorScheme='black'
-          onClick={() => navigate('/auth/sign-up')}>
-          회원가입 하기
-        </Button>
-        <Text
-          color='gray.3'
-          fontSize='xs'>
-          |
-        </Text>
-        <Button
-          size='xs'
-          variant='link'
-          colorScheme='black'>
-          비밀번호 찾기
-        </Button>
-      </HStack>
-    </AuthSignInSignUpFormContainer>
+      <SignInFooterLinks navigate={navigate} />
+    </AuthFormContainer>
   )
 }
 
 export default SignInPage
-
-const styles = createSxProps({
-  button: {
-    backgroundColor: 'green.500'
-  }
-})

@@ -1,35 +1,17 @@
-import {
-  Button,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  HStack,
-  Input,
-  Spacer,
-  Stack,
-  Text
-} from '@chakra-ui/react'
+import { Stack, Text } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
-import { createSxProps } from '@/core/helper'
-import AuthSignInSignUpFormContainer from '@/domains/auth/components/auth-sign-in-sign-up-container'
+import AuthFormContainer from '@/domains/auth/components/auth-form-container'
+import AuthInputField from '@/domains/auth/components/auth-input-field'
+import AuthSubmitButton from '@/domains/auth/components/auth-submit-buttom'
+import { signUpSchema } from '@/domains/auth/constants/validate/schema'
 
-const schema = z.object({
-  email: z.string().email({
-    message: '이메일 형식에 맞지 않습니다.'
-  }),
-  password: z
-    .string()
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{10,}$/, {
-      message:
-        '비밀번호는 10자 이상, 대소문자, 숫자, 특수문자를 조합해야 합니다.'
-    })
-})
+import SignUpFooterLinks from './components/signup-footer-links'
 
-type FormValues = z.infer<typeof schema>
+type FormValues = z.infer<typeof signUpSchema>
 
 const SignUpPage = () => {
   const navigate = useNavigate()
@@ -39,10 +21,7 @@ const SignUpPage = () => {
     getValues,
     formState: { errors, isSubmitting }
   } = useForm<FormValues>({
-    defaultValues: {
-      email: ''
-    },
-    resolver: zodResolver(schema)
+    resolver: zodResolver(signUpSchema)
   })
 
   const onClickEmailDuplicateCheck = () => {
@@ -58,7 +37,7 @@ const SignUpPage = () => {
   }
 
   return (
-    <AuthSignInSignUpFormContainer>
+    <AuthFormContainer>
       <Text
         color='green.700'
         fontWeight='bold'
@@ -71,91 +50,32 @@ const SignUpPage = () => {
         width='full'
         spacing={7}>
         <Stack spacing={2}>
-          <Flex gap={2}>
-            <FormControl
-              isInvalid={!!errors.email}
-              isRequired>
-              <Input
-                type='email'
-                size='lg'
-                fontSize='sm'
-                focusBorderColor='primary'
-                errorBorderColor='red_soft'
-                placeholder='이메일 주소를 입력해주세요.'
-                {...register('email')}
-              />
-              <FormErrorMessage
-                fontSize='xs'
-                color='red_soft'>
-                {errors.email?.message}
-              </FormErrorMessage>
-            </FormControl>
-            <Button
-              size='lg'
-              fontSize='sm'
-              colorScheme='green'
-              bg='green_gray'
-              fontWeight='semibold'
-              sx={styles.button}
-              onClick={onClickEmailDuplicateCheck}>
-              중복 확인
-            </Button>
-          </Flex>
-          <FormControl
+          <AuthInputField
+            type='email'
+            placeholder='이메일 주소를 입력해주세요.'
+            register={register('email')}
+            isInvalid={!!errors.email}
+            errorMessage={errors.email?.message}
+            hasButton={true}
+            buttonLabel='중복 확인'
+            onButtonClick={onClickEmailDuplicateCheck}
+          />
+          <AuthInputField
+            type='password'
+            placeholder='비밀번호를 입력해주세요.'
+            register={register('password')}
             isInvalid={!!errors.password}
-            isRequired>
-            <Input
-              type='password'
-              size='lg'
-              fontSize='sm'
-              focusBorderColor='primary'
-              errorBorderColor='red_soft'
-              placeholder='비밀번호를 입력해주세요.'
-              {...register('password')}
-            />
-            <FormErrorMessage
-              fontSize='xs'
-              color='red_soft'>
-              {errors.password?.message}
-            </FormErrorMessage>
-          </FormControl>
+            errorMessage={errors.password?.message}
+          />
         </Stack>
-        <Button
-          type='submit'
-          w='100%'
-          colorScheme='green'
-          bg='green_gray'
-          fontWeight='semibold'
-          sx={styles.button}
-          isLoading={isSubmitting}>
-          회원가입
-        </Button>
+        <AuthSubmitButton
+          isLoading={isSubmitting}
+          buttonLabel='회원가입'
+        />
       </Stack>
-      <HStack
-        w='full'
-        spacing={4}>
-        <Text
-          fontSize='xs'
-          color='black'>
-          이미 회원이신가요?
-        </Text>
-        <Spacer />
-        <Button
-          size='xs'
-          variant='link'
-          colorScheme='black'
-          onClick={() => navigate('/auth/sign-in')}>
-          로그인
-        </Button>
-      </HStack>
-    </AuthSignInSignUpFormContainer>
+      <SignUpFooterLinks navigate={navigate} />
+    </AuthFormContainer>
   )
 }
 
 export default SignUpPage
-
-const styles = createSxProps({
-  button: {
-    backgroundColor: 'green.500'
-  }
-})
