@@ -1,5 +1,7 @@
 import { Button, Flex, Text } from '@chakra-ui/react'
 
+import { createSxProps } from '@/core/helper'
+
 const LoginPage = () => {
   return (
     <Flex
@@ -13,7 +15,8 @@ const LoginPage = () => {
         bg='green_gray'
         borderRadius='99px'
         padding='16px 36px'
-        fontWeight='bold'>
+        fontWeight='bold'
+        sx={styles.container}>
         Login
       </Button>
       <Text
@@ -26,3 +29,9 @@ const LoginPage = () => {
 }
 
 export default LoginPage
+
+const styles = createSxProps({
+  container: {
+    backgroundColor: 'green.500'
+  }
+})

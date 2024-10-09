@@ -4,8 +4,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider } from 'react-router-dom'
 
 import MultiProvider from './providers/multi-provider'
-import { router } from './routes'
-import global from './style/global'
+import { router } from './router/router'
+import { global } from './style/global'
 import theme, { colors, typography, weight } from './style/theme'
 
 function App() {
@@ -21,12 +21,9 @@ function App() {
     colors,
     typography,
     weight,
-    styles: {
-      global: () => ({
-        body: {
-          fontFamily: '"Pretendard Variable'
-        }
-      })
+    fonts: {
+      heading: 'Pretendard Variable',
+      body: 'Pretendard Variable'
     }
   })
 
@@ -41,7 +38,10 @@ function App() {
             children={undefined}
             key='theme-provider'
           />,
-          <ChakraProvider theme={chakraTheme} />,
+          <ChakraProvider
+            resetCSS={true}
+            theme={chakraTheme}
+          />,
           <RouterProvider router={router} />
         ]}
       />
