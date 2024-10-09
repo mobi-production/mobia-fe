@@ -4,9 +4,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
-import AuthFormContainer from '@/domains/auth/components/auth-form-container'
-import AuthInputField from '@/domains/auth/components/auth-input-field'
-import AuthSubmitButton from '@/domains/auth/components/auth-submit-buttom'
+import {
+  AuthFormContainer,
+  AuthInputField,
+  AuthSubmitButton
+} from '@/domains/auth/components'
 import { signInSchema } from '@/domains/auth/constants/validate/schema'
 
 import SignInFooterLinks from './components/signin-footer-links'
