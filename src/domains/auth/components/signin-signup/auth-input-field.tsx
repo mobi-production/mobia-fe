@@ -40,7 +40,7 @@ const AuthInputField: React.FC<AuthInputFieldProps> = ({
           size='lg'
           fontSize='sm'
           focusBorderColor='primary'
-          errorBorderColor='red_soft'
+          errorBorderColor='red.4'
           placeholder={placeholder}
           {...register}
         />
@@ -60,7 +60,7 @@ const AuthInputField: React.FC<AuthInputFieldProps> = ({
       {errorMessage && (
         <FormErrorMessage
           fontSize='xs'
-          color='red_soft'>
+          color='red.4'>
           {errorMessage}
         </FormErrorMessage>
       )}
