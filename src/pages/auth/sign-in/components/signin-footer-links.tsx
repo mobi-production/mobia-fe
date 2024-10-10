@@ -12,7 +12,7 @@ const SignInFooterLinks: React.FC<Props> = ({ navigate }) => {
         size='xs'
         variant='link'
         colorScheme='black'
-        onClick={() => navigate('/auth/sign-up')}>
+        onClick={() => navigate('/sign-up')}>
         회원가입 하기
       </Button>
       <Text

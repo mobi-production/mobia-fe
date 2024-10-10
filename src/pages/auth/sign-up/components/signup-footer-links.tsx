@@ -20,7 +20,7 @@ const SignUpFooterLinks: React.FC<Props> = ({ navigate }) => {
         size='xs'
         variant='link'
         colorScheme='black'
-        onClick={() => navigate('/auth/sign-in')}>
+        onClick={() => navigate('/auth')}>
         로그인
       </Button>
     </HStack>
