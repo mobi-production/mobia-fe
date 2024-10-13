@@ -1,15 +1,13 @@
-import { Stack, Text } from '@chakra-ui/react'
+import { Button, Stack, Text } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
-import {
-  AuthFormContainer,
-  AuthInputField,
-  AuthSubmitButton
-} from '@/domains/auth/components'
-import { signUpSchema } from '@/domains/auth/constants/validate/schema'
+import InputWithOptionButton from '@/core/components/input/input-with-option-button'
+import { createSxProps } from '@/core/helper'
+import { AuthFormContainer } from '@/domains/auth/components'
+import { signUpSchema } from '@/domains/schema/schema'
 
 import SignUpFooterLinks from './components/signup-footer-links'
 
@@ -52,7 +50,7 @@ const SignUpPage = () => {
         width='full'
         spacing={7}>
         <Stack spacing={2}>
-          <AuthInputField
+          <InputWithOptionButton
             type='email'
             placeholder='이메일 주소를 입력해주세요.'
             register={register('email')}
@@ -62,7 +60,7 @@ const SignUpPage = () => {
             buttonLabel='중복 확인'
             onButtonClick={onClickEmailDuplicateCheck}
           />
-          <AuthInputField
+          <InputWithOptionButton
             type='password'
             placeholder='비밀번호를 입력해주세요.'
             register={register('password')}
@@ -70,10 +68,15 @@ const SignUpPage = () => {
             errorMessage={errors.password?.message}
           />
         </Stack>
-        <AuthSubmitButton
+        <Button
+          type='submit'
+          colorScheme='green'
+          bg='green_gray'
+          fontWeight='semibold'
           isLoading={isSubmitting}
-          buttonLabel='회원가입'
-        />
+          sx={styles.button}>
+          회원가입
+        </Button>
       </Stack>
       <SignUpFooterLinks navigate={navigate} />
     </AuthFormContainer>
@@ -81,3 +84,9 @@ const SignUpPage = () => {
 }
 
 export default SignUpPage
+
+const styles = createSxProps({
+  button: {
+    backgroundColor: 'green.500'
+  }
+})

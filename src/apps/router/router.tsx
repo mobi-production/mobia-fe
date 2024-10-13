@@ -1,5 +1,7 @@
 import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom'
 
+import SignUpPage from '@/pages/auth/sign-up/page'
+
 import RootError from '../error'
 import RootLayout from '../layouts/templates/root-layout'
 import RootLoader from '../loader'
@@ -20,7 +22,8 @@ const defaultRoutes: RouteObject = {
       element: <Navigate to='/auth' />
     },
     {
-      element: <Navigate to='/sign-up' />
+      path: '/sign-up',
+      element: <SignUpPage />
     }
   ]
 }

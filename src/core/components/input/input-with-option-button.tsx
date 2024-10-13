@@ -5,11 +5,12 @@ import {
   FormErrorMessage,
   Input
 } from '@chakra-ui/react'
+import { InputHTMLAttributes } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 import { createSxProps } from '@/core/helper'
 
-type AuthInputFieldProps = {
+type Props = {
   type: string
   placeholder: string
   errorMessage?: string
@@ -18,9 +19,9 @@ type AuthInputFieldProps = {
   hasButton?: boolean
   buttonLabel?: string
   onButtonClick?: () => void
-}
+} & InputHTMLAttributes<HTMLInputElement>
 
-const AuthInputField: React.FC<AuthInputFieldProps> = ({
+const InputWithOptionButton: React.FC<Props> = ({
   type,
   placeholder,
   errorMessage,
@@ -68,7 +69,7 @@ const AuthInputField: React.FC<AuthInputFieldProps> = ({
   )
 }
 
-export default AuthInputField
+export default InputWithOptionButton
 
 const styles = createSxProps({
   button: {

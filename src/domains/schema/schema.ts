@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
-import { errorMessage } from './error'
-import { validation } from './validate'
+import { errorMessage } from '../auth/constants/validate/error'
+import { validation } from '../auth/constants/validate/validate'
 
 export const signInSchema = z.object({
   email: z.string().email({ message: errorMessage.email }),
