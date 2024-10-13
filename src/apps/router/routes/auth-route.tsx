@@ -1,11 +1,11 @@
 import { RouteObject } from 'react-router-dom'
 
-import LoginPage from '@/pages/auth/login'
+import SignInPage from '@/pages/auth/sign-in/page'
 
 const authRoute: RouteObject[] = [
   {
     index: true,
-    element: <LoginPage />
+    element: <SignInPage />
   }
 ]
 export default authRoute

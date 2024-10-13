@@ -1,10 +1,13 @@
 import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom'
 
+import SignUpPage from '@/pages/auth/sign-up/page'
+
 import RootError from '../error'
 import RootLayout from '../layouts/templates/root-layout'
 import RootLoader from '../loader'
 import { createMergeRoute } from './helpers'
 import authRoute from './routes/auth-route'
+import signUpRoute from './routes/sign-up-route'
 
 const defaultRoutes: RouteObject = {
   element: (
@@ -17,6 +20,10 @@ const defaultRoutes: RouteObject = {
     {
       index: true,
       element: <Navigate to='/auth' />
+    },
+    {
+      path: '/sign-up',
+      element: <SignUpPage />
     }
   ]
 }
@@ -25,6 +32,7 @@ const mergeRoute = createMergeRoute(defaultRoutes)
 
 export const router = createBrowserRouter(
   mergeRoute({
-    auth: authRoute
+    auth: authRoute,
+    ['sign-up']: signUpRoute
   })
 )
